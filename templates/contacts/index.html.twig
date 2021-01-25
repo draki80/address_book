@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacts index{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Contacts index</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Street_number</th>
+                    <th>Zip</th>
+                    <th>City</th>
+                    <th>Phone</th>
+                    <th>Date</th>
+                    <th>Email</th>
+                    <th>Picture</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for contact in contacts %}
+                <tr>
+                    <td>{{ contact.id }}</td>
+                    <td>{{ contact.firstname }}</td>
+                    <td>{{ contact.lastname }}</td>
+                    <td>{{ contact.streetNumber }}</td>
+                    <td>{{ contact.zip }}</td>
+                    <td>{{ contact.city }}</td>
+                    <td>{{ contact.phone }}</td>
+                    <td>{{ contact.date ? contact.date|date('Y-m-d') : '' }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.picture }}</td>
+                    <td>
+                        <a href="{{ path('contacts_show', {'id': contact.id}) }}">show</a>
+                        <a href="{{ path('contacts_edit', {'id': contact.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="11">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('contacts_new') }}">Create new</a>
+    </div>
+{% endblock %}
